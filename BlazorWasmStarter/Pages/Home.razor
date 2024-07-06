@@ -2,15 +2,11 @@
 
 <PageTitle>Home</PageTitle>
 
-<button class="btn btn-success mb-3" @onclick="HandleChangeLoadingButtonClick">Change Loading</button>
-<h2 class="@(isCompany ? "text-info" : "text-danger")">Vergi Kimlik No:</h2>
+<p class="mb-1">@password</p>
 
-@code{
-    private bool isCompany = false;
+<input type="text" class="form-control" @bind="password" @bind:event="oninput"/>
 
-    private void HandleChangeLoadingButtonClick()
-    {
-        
-        isCompany = !isCompany;
-    }
+@code
+{
+    private string password = string.Empty;
 }

@@ -1,0 +1,17 @@
+﻿@page "/IsLoading-and-company-examples"
+
+<PageTitle>Home</PageTitle>
+
+<button class="btn btn-success mb-3" @onclick="HandleChangeLoadingButtonClick">Change Loading</button>
+<h2 class="@(isCompany ? "text-info" : "text-danger")">Vergi Kimlik No:</h2>
+
+@code 
+{
+    private bool isCompany = false;
+
+    private void HandleChangeLoadingButtonClick()
+    {
+
+        isCompany = !isCompany;
+    }
+}
