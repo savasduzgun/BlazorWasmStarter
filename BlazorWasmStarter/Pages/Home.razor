@@ -4,13 +4,45 @@
 
 <div class="input-group mb-3">
     <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
-    <span class="input-group-text" id="basic-addon2">📄</span>
-    <span class="input-group-text" id="basic-addon3">🔄</span>
-    <span class="input-group-text" id="basic-addon4">💾</span>
+    <span @onmouseenter="@(()=>OnEmojiHover(iconType:"copy"))" @onmouseleave="@OnEmojiMouseLeft" class="input-group-text my-clickable-button @onHoverCopyCss" id="basic-addon2">📄</span>
+    <span @onmouseenter="@(()=>OnEmojiHover(iconType:"generate"))" @onmouseleave="@OnEmojiMouseLeft" class="input-group-text my-clickable-button @onHoverGenerateCss" id="basic-addon3">🔄</span>
+    <span @onmouseenter="@(()=>OnEmojiHover(iconType:"save"))" @onmouseleave="@OnEmojiMouseLeft" class="input-group-text my-clickable-button @onHoverSaveCss" id="basic-addon4">💾</span>
 </div>
 
 @code
 {
     private string password = string.Empty;
     private int passwordLenght = 6;
+    private string onHoverCopyCss = string.Empty;
+    private string onHoverGenerateCss = string.Empty;
+    private string onHoverSaveCss = string.Empty;
+
+    private void OnEmojiHover(string iconType)
+    {
+        switch (iconType)
+        {
+            case "copy":
+                onHoverCopyCss = "bg-secondary";
+                break;
+
+            case "generate":
+                onHoverGenerateCss = "bg-secondary";
+                break;
+
+            case "save":
+                onHoverSaveCss = "bg-secondary";
+                break;
+
+            default:
+
+                break;
+        }
+    }
+
+    private void OnEmojiMouseLeft()
+    {
+        onHoverCopyCss = "";
+        onHoverGenerateCss = string.Empty;
+        onHoverSaveCss = "";
+    }
 }
