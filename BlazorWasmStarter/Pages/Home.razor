@@ -1,11 +1,12 @@
 ﻿@page "/"
+@using System.Text
 
 <PageTitle>Home</PageTitle>
 
 <div class="input-group mb-3">
-    <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
+    <input @bind="password" readonly="readonly" type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
     <span @onmouseenter="@(()=>OnEmojiHover(iconType:"copy"))" @onmouseleave="@OnEmojiMouseLeft" class="input-group-text my-clickable-button @onHoverCopyCss" id="basic-addon2">📄</span>
-    <span @onmouseenter="@(()=>OnEmojiHover(iconType:"generate"))" @onmouseleave="@OnEmojiMouseLeft" class="input-group-text my-clickable-button @onHoverGenerateCss" id="basic-addon3">🔄</span>
+    <span @onclick="HandleGeneratePasswordClick" @onmouseenter="@(()=>OnEmojiHover(iconType:"generate"))" @onmouseleave="@OnEmojiMouseLeft" class="input-group-text my-clickable-button @onHoverGenerateCss" id="basic-addon3">🔄</span>
     <span @onmouseenter="@(()=>OnEmojiHover(iconType:"save"))" @onmouseleave="@OnEmojiMouseLeft" class="input-group-text my-clickable-button @onHoverSaveCss" id="basic-addon4">💾</span>
 </div>
 
@@ -16,6 +17,21 @@
     private string onHoverCopyCss = string.Empty;
     private string onHoverGenerateCss = string.Empty;
     private string onHoverSaveCss = string.Empty;
+
+    private static Random random = new Random();
+    private static StringBuilder stringBuilder = new StringBuilder();
+
+    private void HandleGeneratePasswordClick()
+    {
+        stringBuilder.Clear();
+
+        for (int i = 0; i < passwordLenght; i++)
+        {
+            stringBuilder.Append(random.Next(0, 10));
+        }
+
+        password = stringBuilder.ToString();
+    }
 
     private void OnEmojiHover(string iconType)
     {
