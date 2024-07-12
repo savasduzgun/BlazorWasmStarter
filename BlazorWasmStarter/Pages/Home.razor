@@ -9,6 +9,21 @@
     <span @onclick="HandleGeneratePasswordClick" @onmouseenter="@(()=>OnEmojiHover(iconType:"generate"))" @onmouseleave="@OnEmojiMouseLeft" class="input-group-text my-clickable-button @onHoverGenerateCss" id="basic-addon3">🔄</span>
     <span @onmouseenter="@(()=>OnEmojiHover(iconType:"save"))" @onmouseleave="@OnEmojiMouseLeft" class="input-group-text my-clickable-button @onHoverSaveCss" id="basic-addon4">💾</span>
 </div>
+<div class="card mt-3">
+    <div class="card-header">
+        💾 Saved Passwords
+    </div>
+    <div class="card-body">
+        <ul class="list-group">
+            <li class="list-groupitem">An item</li>
+            <li class="list-groupitem">A second item</li>
+            <li class="list-groupitem">A third item</li>
+            <li class="list-groupitem">A fourth item</li>
+            <li class="list-groupitem">An a fifth one</li>
+        </ul>
+    </div>
+</div>
+
 
 @code
 {
