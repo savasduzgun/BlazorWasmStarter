@@ -4,10 +4,10 @@
 <PageTitle>Home</PageTitle>
 
 <div class="input-group mb-3">
-    <input @bind="password" readonly="readonly" type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
+    <input @bind="password" readonly="readonly" type="text" class="form-control">
     <span @onmouseenter="@(()=>OnEmojiHover(iconType:"copy"))" @onmouseleave="@OnEmojiMouseLeft" class="input-group-text my-clickable-button @onHoverCopyCss" id="basic-addon2">📄</span>
     <span @onclick="HandleGeneratePasswordClick" @onmouseenter="@(()=>OnEmojiHover(iconType:"generate"))" @onmouseleave="@OnEmojiMouseLeft" class="input-group-text my-clickable-button @onHoverGenerateCss" id="basic-addon3">🔄</span>
-    <span @onmouseenter="@(()=>OnEmojiHover(iconType:"save"))" @onmouseleave="@OnEmojiMouseLeft" class="input-group-text my-clickable-button @onHoverSaveCss" id="basic-addon4">💾</span>
+    <span @onclick="HandleSavePasswordClick" @onmouseenter="@(()=>OnEmojiHover(iconType:"save"))" @onmouseleave="@OnEmojiMouseLeft" class="input-group-text my-clickable-button @onHoverSaveCss" id="basic-addon4">💾</span>
 </div>
 <div class="card mt-3">
     <div class="card-header">
@@ -15,11 +15,10 @@
     </div>
     <div class="card-body">
         <ul class="list-group">
-            <li class="list-groupitem">An item</li>
-            <li class="list-groupitem">A second item</li>
-            <li class="list-groupitem">A third item</li>
-            <li class="list-groupitem">A fourth item</li>
-            <li class="list-groupitem">An a fifth one</li>
+            @foreach (var savedPassword in savedPasswords)
+            {
+                <li class="list-groupitem">@savedPassword</li>
+            }
         </ul>
     </div>
 </div>
@@ -29,6 +28,8 @@
 {
     private string password = string.Empty;
     private int passwordLenght = 6;
+    private List<string> savedPasswords = [];
+
     private string onHoverCopyCss = string.Empty;
     private string onHoverGenerateCss = string.Empty;
     private string onHoverSaveCss = string.Empty;
@@ -46,6 +47,15 @@
         }
 
         password = stringBuilder.ToString();
+    }
+
+    private void HandleSavePasswordClick()
+    {
+        if (string.IsNullOrEmpty(password) || savedPasswords.Exists(x=>x==password))
+            return;
+
+
+        savedPasswords.Insert(0, password);
     }
 
     private void OnEmojiHover(string iconType)
