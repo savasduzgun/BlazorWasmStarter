@@ -1,6 +1,7 @@
 ﻿@page "/"
 @using System.Text
 @using BlazorWasmStarter.Enums
+@using Blazored.Toast.Services
 @inject NavigationManager Navigation
 @inject IToastService ToastService
 
@@ -58,7 +59,7 @@
 
 <div class="card mt-3">
     <div class="card-header">
-        <MaterialSaveIcon Width="2" Height="2" ColourCode="#2E236C" OnClick="@HandleSaveIconClick" /> Saved Passwords
+        <MaterialSaveIcon Width="2" Height="2" ColourCode="#2E236C" Onclick="@HandleSaveIconClick" /> Saved Passwords
     </div>
     <div class="card-body">
         <ul class="list-group">
@@ -100,7 +101,7 @@
     // allSpecialCharacters = "!@#$%^&*()_+-=[]{}|;':,.<>?";
     // Istanbul Lat/Long: 41.0082° N, 28.9784° E
 
-    protected override void OnInitialized()
+    protected override void OnInitialized() //sayfa yüklenirken şifre oluşsun istiyorum
     {
         GeneratePassword();
 
